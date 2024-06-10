@@ -32,13 +32,10 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  position: relative;
-  z-index: -2;
 }
 
 .container {
   width: 50%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -116,11 +113,9 @@ main p {
   font-size: 15px;
 }
 
-svg {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  z-index: -1;
+.wave {
+  background-color: #ead8c0;
+  margin-bottom: -10px;
 }
 
 @media only screen and (max-width: 600px) {
