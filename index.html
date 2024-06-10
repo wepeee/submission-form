@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Form Submission</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="container-form">
+          <h1>Input Data plis tengs.</h1>
+          <div class="main-form">
+            <form id="submit-form">
+              <label for="nrp">NRP lengkap:</label><br />
+              <input
+                type="text"
+                id="nrp"
+                name="NRP"
+                maxlength="10"
+                required
+              /><br /><br />
+              <label for="nama">Nama:</label><br />
+              <input type="text" id="nama" name="Nama" required /><br /><br />
+              <label for="ttl">Tempat Tanggal Lahir:</label><br />
+              <input
+                type="text"
+                id="ttl"
+                name="Tempat Tanggal Lahir"
+                value="Surabaya, 01 Januari 1945"
+                required
+              /><br /><br />
+              <label for="hobi">Hobi:</label><br />
+              <input
+                type="text"
+                id="hobi"
+                name="Hobi"
+                value="tidur"
+                required
+              /><br /><br />
+              <label for="asal">Asal:</label><br />
+              <input type="text" id="asal" name="Asal" required /><br /><br />
+              <input id="submit-btn" class="btn" type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document
+        .getElementById("submit-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("submit-btn").textContent = "Submitting...";
+
+          var nrp = document.getElementById("nrp").value;
+          var nama = document.getElementById("nama").value;
+          var ttl = document.getElementById("ttl").value;
+          var hobi = document.getElementById("hobi").value;
+          var asal = document.getElementById("asal").value;
+
+          var data = {
+            NRP: nrp,
+            Nama: nama,
+            "Tempat Tanggal Lahir": ttl,
+            Hobi: hobi,
+            Asal: asal,
+          };
+
+          var queryString = new URLSearchParams(data).toString();
+
+          fetch(
+            "https://script.google.com/macros/s/AKfycbyhxiuJyzxytNPrvmpy-qv-3gqO8-EmyU4QG_rxkXqBGldWSQ9kuvua3El9AHotv_qLuA/exec",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: queryString,
+            }
+          )
+            .then((response) => response.text())
+            .then((data) => {
+              alert("Form submitted successfully");
+              console.log(data);
+              document.getElementById("submit-btn").textContent = "Submit";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              document.getElementById("submit-btn").textContent = "Submit";
+            });
+        });
+    </script>
+  </body>
+</html>
